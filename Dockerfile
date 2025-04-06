@@ -1,9 +1,17 @@
-FROM python:3.8-slim-buster
+# Use the official Python 3.12 slim image
+FROM python:3.12-slim
 
-RUN apt update -y && apt install awscli -y
+# Set working directory inside the container
 WORKDIR /app
 
+# Copy your project files into the container
 COPY . /app
+
+# Upgrade pip to latest version
+RUN pip install --upgrade pip
+
+# Install dependencies
 RUN pip install -r requirements.txt
 
-CMD ["python3", "app.py"]
+# Default command to run your app
+CMD ["python", "app.py"]
