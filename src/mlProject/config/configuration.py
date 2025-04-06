@@ -5,6 +5,9 @@ from mlProject.entity.config_entity import (DataIngestionConfig,
                                             DataTransformationConfig,
                                             ModelTrainerConfig,
                                             ModelEvaluationConfig)
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 class ConfigurationManager:
     def __init__(
@@ -103,8 +106,7 @@ class ConfigurationManager:
             all_params=params,
             metric_file_name = config.metric_file_name,
             target_column = schema.name,
-            mlflow_uri="https://dagshub.com/entbappy/End-to-end-Machine-Learning-Project-with-MLflow.mlflow",
-           
+            mlflow_uri=os.getenv("MLFLOW_TRACKING_URI"),
         )
 
         return model_evaluation_config
